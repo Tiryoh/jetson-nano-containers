@@ -1,12 +1,17 @@
 ARG BASE_IMAGE=nvcr.io/nvidia/l4t-base:r32.4.3
 
-################################################################################
+###############################################################################################################################################
 # ros dashing ros-base 
-################################################################################
-FROM ${BASE_IMAGE}
+#
+# build
+# $ docker build -t ros:dashing-ros-base-l4t-r32.4.3 .
+#
+# run
+# $ docker run --network host -v /tmp/argus_socket:/tmp/argus_socket --runtime nvidia --rm -it ros:dashing-ros-base-l4t-r32.4.3
+#
+###############################################################################################################################################
 
-ARG ROS_PKG=ros-base
-ENV ROS_DISTRO=dashing
+FROM ${BASE_IMAGE}
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -29,6 +34,20 @@ RUN apt-get update && \
     lsb-release \
     && rm -rf /var/lib/apt/lists/*
 
+# compile and install yaml-cpp-0.6, which some ROS packages may use (but is not in the 18.04 apt repo)
+RUN git clone --branch yaml-cpp-0.6.0 https://github.com/jbeder/yaml-cpp yaml-cpp-0.6 && \
+    cd yaml-cpp-0.6 && \
+    mkdir build && \
+    cd build && \
+    cmake -DBUILD_SHARED_LIBS=ON .. && \
+    make -j$(nproc) && \
+    make install && \
+    cd /workspace && \
+    rm -rf yaml-cpp-0.6
+
+ARG ROS_PKG=ros-base
+ENV ROS_DISTRO=dashing
+
 RUN curl -Ls https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 RUN sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
 
@@ -47,17 +66,6 @@ RUN apt-get update && \
 # init/update rosdep
 RUN rosdep init && \
     rosdep update
-
-# compile and install yaml-cpp-0.6, which some ROS packages may use (but is not in the 18.04 apt repo)
-RUN git clone --branch yaml-cpp-0.6.0 https://github.com/jbeder/yaml-cpp yaml-cpp-0.6 && \
-    cd yaml-cpp-0.6 && \
-    mkdir build && \
-    cd build && \
-    cmake -DBUILD_SHARED_LIBS=ON .. && \
-    make -j$(nproc) && \
-    make install && \
-    cd /workspace && \
-    rm -rf yaml-cpp-0.6
 
 # setup entrypoint
 WORKDIR /root/ros_workspace

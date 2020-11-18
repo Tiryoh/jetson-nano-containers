@@ -1,9 +1,17 @@
 ARG BASE_IMAGE=nvcr.io/nvidia/l4t-base:r32.4.4
 
-FROM ${BASE_IMAGE}
+###############################################################################################################################################
+# ros melodic ros-base 
+#
+# build
+# $ docker build -t ros:melodic-ros-base-l4t-r32.4.4 .
+#
+# run
+# $ docker run --network host -v /tmp/argus_socket:/tmp/argus_socket --runtime nvidia --rm -it ros:melodic-ros-base-l4t-r32.4.4
+#
+###############################################################################################################################################
 
-ARG ROS_PKG=ros-base
-ENV ROS_DISTRO=melodic
+FROM ${BASE_IMAGE}
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -25,6 +33,9 @@ RUN apt-get update && \
     gnupg2 \
     lsb-release \
     && rm -rf /var/lib/apt/lists/*
+
+ARG ROS_PKG=ros-base
+ENV ROS_DISTRO=melodic
 
 RUN curl -Ls https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 RUN sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'

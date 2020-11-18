@@ -1,12 +1,17 @@
 ARG BASE_IMAGE=nvcr.io/nvidia/l4t-base:r32.4.4
 
-################################################################################
-# base ros-eloquent
-################################################################################
-FROM ${BASE_IMAGE} AS ros-eloquent
+###############################################################################################################################################
+# ros eloquent ros-base 
+#
+# build
+# $ docker build -t ros:eloquent-ros-base-l4t-r32.4.4 .
+#
+# run
+# $ docker run --network host -v /tmp/argus_socket:/tmp/argus_socket --runtime nvidia --rm -it ros:eloquent-ros-base-l4t-r32.4.4
+#
+###############################################################################################################################################
 
-ARG ROS_PKG=ros-base
-ENV ROS_DISTRO=eloquent
+FROM ${BASE_IMAGE}
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -39,6 +44,9 @@ RUN git clone --branch yaml-cpp-0.6.0 https://github.com/jbeder/yaml-cpp yaml-cp
     make install && \
     cd /workspace && \
     rm -rf yaml-cpp-0.6
+
+ARG ROS_PKG=ros-base
+ENV ROS_DISTRO=eloquent
 
 RUN curl -Ls https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | apt-key add -
 RUN sh -c 'echo "deb [arch=$(dpkg --print-architecture)] http://packages.ros.org/ros2/ubuntu $(lsb_release -cs) main" > /etc/apt/sources.list.d/ros2-latest.list'
