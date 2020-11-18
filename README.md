@@ -20,12 +20,12 @@ Jetson Nano用のDockerfileです。
 
 以下の手順でこのDockerfileを使用できます。
 
-0. Docker実行環境の用意
-1. Dockerfileのダウンロード
-2. Dockerイメージのビルド
-3. Dockerコンテナの起動
+0. [Docker実行環境の用意](#0-docker実行環境の用意)
+1. [Dockerfileのダウンロード](#1-dockerfileのダウンロード)
+2. [Dockerイメージのビルド](#2-dockerイメージのビルド)
+3. [Dockerコンテナの起動](#3-dockerコンテナの起動)
 
-詳細は後述します。
+詳細および[サンプルの実行方法](#サンプルの実行方法)は後述します。
 
 ## 0. Docker実行環境の用意
 
@@ -73,7 +73,7 @@ macOSの場合はそのままビルドできます。
 
 Linuxの場合は以下のコマンドで [multiarch/qemu-user-static](https://github.com/multiarch/qemu-user-static) を使ってクロスビルドできるように設定できます。
 
-`standard_init_linux.go:211: exec user process caused "exec format error"`というエラーが出た場合は、以下のコマンドを再度実行してみてください。
+`docker build`時や`docker run`時に`standard_init_linux.go:211: exec user process caused "exec format error"`というエラーが出た場合は、以下のコマンドを再度実行してみてください。
 
 ```
 $ sudo docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
@@ -207,7 +207,7 @@ $ roslaunch ros_deep_learning video_source.ros1.launch input:=v4l2:///dev/video0
 #### 映像の確認
 
 `roslaunch ros_deep_learning video_source.ros1.launch`を実行すると、
-`/video_source/raw`と言う名前で[sensor_msgs/Image](http://docs.ros.org/en/api/sensor_msgs/html/msg/Image.html)トピックが配信されます。
+`/video_source/raw`と言う名前で`[sensor_msgs/Image](http://docs.ros.org/en/api/sensor_msgs/html/msg/Image.html)`形式のROSトピックが配信されます。
 
 `rqt_image_view`でノートPC等から確認できます。
 
