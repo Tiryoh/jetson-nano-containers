@@ -70,6 +70,6 @@ RUN rosdep init && \
 # setup entrypoint
 WORKDIR /root/ros_workspace
 COPY ./ros_entrypoint.sh /ros_entrypoint.sh
-RUN echo 'source /opt/ros'${ROS_DISTRO}'/setup.bash' >> /root/.bashrc 
+RUN echo 'source /opt/ros/'${ROS_DISTRO}'/setup.bash' >> /root/.bashrc 
 ENTRYPOINT ["/ros_entrypoint.sh"]
 CMD ["bash"]
