@@ -13,8 +13,9 @@ Jetson Nano用のDockerfileです。
 * L4T R32.4.4 (JetPack 4.4.1)
     * [ROS Dashing](./l4t-r32.4.4/ros-dashing/Dockerfile)
     * [ROS Eloquent](./l4t-r32.4.4/ros-eloquent/Dockerfile)
+        * [ros-deep-learning](./l4t-r32.4.4/ros-deep-learning-eloquent/Dockerfile)
     * [ROS Melodic](./l4t-r32.4.4/ros-melodic/Dockerfile)
-        * [ros-deep-learning](./l4t-r32.4.4/ros-deep-learning-melodic/Dockefile)
+        * [ros-deep-learning](./l4t-r32.4.4/ros-deep-learning-melodic/Dockerfile)
 
 ## 使い方
 
