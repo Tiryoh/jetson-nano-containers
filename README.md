@@ -2,7 +2,8 @@
 
 Jetson Nano用のDockerfileです。
 
-主にROS関係のDockerfileを揃えています。
+主にROS関係のDockerfileを揃えています。  
+TensorFlowやPyTorch関連のDockerfileは[dusty-nv/jetson-containers](https://github.com/dusty-nv/jetson-containers)に公開されているのでそちらをご利用ください。
 
 ## Dockerfile
 
