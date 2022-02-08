@@ -17,6 +17,9 @@ TensorFlowやPyTorch関連のDockerfileは[dusty-nv/jetson-containers](https://g
         * [ros-deep-learning](./l4t-r32.4.4/ros-deep-learning-eloquent/Dockerfile)
     * [ROS Melodic](./l4t-r32.4.4/ros-melodic/Dockerfile)
         * [ros-deep-learning](./l4t-r32.4.4/ros-deep-learning-melodic/Dockerfile)
+* L4T R32.5.0 (JetPack 4.5) / R32.5.1 (JetPack 4.5.1)
+    * [ROS Melodic](./l4t-r32.5.0/ros-melodic/Dockerfile)
+        * [ros-deep-learning](./l4t-r32.5.4/ros-deep-learning-melodic/Dockerfile)
 * L4T R32.6.1 (JetPack 4.6.1)
     * [ROS Melodic](./l4t-r32.6.1/ros-melodic/Dockerfile)
 
