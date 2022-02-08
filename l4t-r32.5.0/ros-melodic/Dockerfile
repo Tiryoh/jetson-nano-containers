@@ -4,10 +4,10 @@ ARG BASE_IMAGE=nvcr.io/nvidia/l4t-base:r32.5.0
 # ros melodic ros-base 
 #
 # build
-# $ docker build -t ros:melodic-ros-base-l4t-r32.4.4 .
+# $ docker build -t ros:melodic-ros-base-l4t-r32.5.0 .
 #
 # run
-# $ docker run --network host -v /tmp/argus_socket:/tmp/argus_socket --runtime nvidia --rm -it ros:melodic-ros-base-l4t-r32.4.4
+# $ docker run --network host -v /tmp/argus_socket:/tmp/argus_socket --runtime nvidia --rm -it ros:melodic-ros-base-l4t-r32.5.0
 #
 ###############################################################################################################################################
 
